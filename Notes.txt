@@ -1,0 +1,11 @@
+# useful commands
+
+du -sh <file-path> # print file size
+ldd <exe> # list exe shared deps
+realpath <symlink> # print symlink realpath
+
+# build and install cmake project
+
+cmake -S . -B build
+cmake --build build --parallel 8
+sudo cmake --install build --prefix /usr/local
