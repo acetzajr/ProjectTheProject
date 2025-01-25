@@ -23,6 +23,6 @@ find_package(PkgConfig REQUIRED)
 
 pkg_check_modules(GLIB REQUIRED IMPORTED_TARGET glib-2.0)
 pkg_check_modules(GSL REQUIRED IMPORTED_TARGET gsl)
-find_package(SDL3 REQUIRED)
+pkg_check_modules(SDL REQUIRED IMPORTED_TARGET sdl3)
 
 add_subdirectory("GameTheGame")

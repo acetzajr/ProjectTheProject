@@ -15,7 +15,7 @@ int main() {
   if (!SDL_Init(SDL_INIT_VIDEO)) {
     goto exit;
   }
-  SDL_Window *window = SDL_CreateWindow("GameTheGame", 1280, 720, 0);
+  SDL_Window *window = SDL_CreateWindow("GameTheGame", 1024, 512, 0);
   if (!window) {
     goto quitSDL;
   }
