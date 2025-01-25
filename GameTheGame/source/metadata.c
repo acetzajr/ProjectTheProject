@@ -1,8 +1,8 @@
 #include "metadata.h"
 
-#include "SDL3/SDL_init.h"
+#include <SDL3/SDL_init.h>
 
-bool GTG_SetAppMetadata() {
+bool SetAppMetadata() {
   if (!SDL_SetAppMetadataProperty(SDL_PROP_APP_METADATA_NAME_STRING,
                                   "GameTheGame"))
     return false;

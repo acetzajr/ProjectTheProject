@@ -1,15 +1,15 @@
-#include "GTG/metadata.h"
-#include "SDL3/SDL_error.h"
-#include "SDL3/SDL_init.h"
-#include "SDL3/SDL_log.h"
-#include "SDL3/SDL_render.h"
-#include "SDL3/SDL_version.h"
-#include "SDL3/SDL_video.h"
+#include "metadata.h"
+#include <SDL3/SDL_error.h>
+#include <SDL3/SDL_init.h>
+#include <SDL3/SDL_log.h>
+#include <SDL3/SDL_render.h>
+#include <SDL3/SDL_version.h>
+#include <SDL3/SDL_video.h>
 
 int main() {
   SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Welcome to GameTheGame\n");
   SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "%s\n", SDL_GetRevision());
-  if (!GTG_SetAppMetadata()) {
+  if (!SetAppMetadata()) {
     goto exit;
   }
   if (!SDL_Init(SDL_INIT_VIDEO)) {
@@ -43,6 +43,5 @@ cleanupWindow:
 quitSDL:
   SDL_Quit();
 exit:
-  SDL_LogError(SDL_LOG_CATEGORY_ERROR, "(SDL_GetError) -> %s\n",
-               SDL_GetError());
+  SDL_LogError(SDL_LOG_CATEGORY_ERROR, "%s\n", SDL_GetError());
 }

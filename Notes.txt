@@ -7,5 +7,9 @@ realpath <symlink> # print symlink realpath
 # build and install cmake project
 
 cmake -S . -B build
-cmake --build build --parallel 8
+cmake --build build --parallel 4
 sudo cmake --install build --prefix /usr/local
+
+# set gcc-14 as gcc
+
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 1 
