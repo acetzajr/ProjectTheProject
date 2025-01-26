@@ -1,6 +1,3 @@
-#ifndef GTG_METADATA_H
-#define GTG_METADATA_H
+#pragma once
 
-bool SetAppMetadata();
-
-#endif
+bool set_app_metadata ();
