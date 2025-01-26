@@ -1,0 +1,4 @@
+#!/bin/bash
+./scripts/format-all
+git add .
+git commit -m "$*"

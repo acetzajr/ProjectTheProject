@@ -6,22 +6,22 @@ bool
 set_app_metadata ()
 {
   if (!SDL_SetAppMetadataProperty (SDL_PROP_APP_METADATA_NAME_STRING,
-				   "GameTheGame"))
+                                   "GameTheGame"))
     return false;
   if (!SDL_SetAppMetadataProperty (SDL_PROP_APP_METADATA_VERSION_STRING,
-				   "1.0.0"))
+                                   "1.0.0"))
     return false;
   if (!SDL_SetAppMetadataProperty (SDL_PROP_APP_METADATA_IDENTIFIER_STRING,
-				   "org.acetzajr.gamethegame"))
+                                   "org.acetzajr.gamethegame"))
     return false;
   if (!SDL_SetAppMetadataProperty (SDL_PROP_APP_METADATA_CREATOR_STRING,
-				   "acetzajr"))
+                                   "acetzajr"))
     return false;
   if (!SDL_SetAppMetadataProperty (SDL_PROP_APP_METADATA_COPYRIGHT_STRING,
-				   "Copyright (c) 2025 acetzajr"))
+                                   "Copyright (c) 2025 acetzajr"))
     return false;
   if (!SDL_SetAppMetadataProperty (SDL_PROP_APP_METADATA_URL_STRING,
-				   "https://github.com/acetzajr"))
+                                   "https://github.com/acetzajr"))
     return false;
   if (!SDL_SetAppMetadataProperty (SDL_PROP_APP_METADATA_TYPE_STRING, "game"))
     return false;

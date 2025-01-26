@@ -70,8 +70,8 @@ main_1 ()
       goto destroy_renderer;
     }
   SDL_Texture *texture = SDL_CreateTexture (renderer, SDL_PIXELFORMAT_ARGB32,
-					    SDL_TEXTUREACCESS_STREAMING,
-					    surface_width, surface_height);
+                                            SDL_TEXTUREACCESS_STREAMING,
+                                            surface_width, surface_height);
   if (!texture)
     {
       fprintf (stderr, "!texture\n");
@@ -80,16 +80,16 @@ main_1 ()
   if (!SDL_SetTextureScaleMode (texture, SDL_SCALEMODE_NEAREST))
     {
       fprintf (stderr,
-	       "!SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST)\n");
+               "!SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST)\n");
       goto destroy_texture;
     }
   cairo_surface_t *surface =
     cairo_image_surface_create (CAIRO_FORMAT_ARGB32, surface_width,
-				surface_height);
+                                surface_height);
   if (cairo_surface_status (surface) != CAIRO_STATUS_SUCCESS)
     {
       fprintf (stderr,
-	       "cairo_surface_status(surface) != CAIRO_STATUS_SUCCESS\n");
+               "cairo_surface_status(surface) != CAIRO_STATUS_SUCCESS\n");
       goto destroy_surface;
     }
   cairo_t *context = cairo_create (surface);
@@ -106,14 +106,14 @@ main_1 ()
     {
       SDL_Event event;
       while (SDL_PollEvent (&event))
-	{
-	  switch (event.type)
-	    {
-	    case SDL_EVENT_WINDOW_CLOSE_REQUESTED:
-	      goto exit_game_loop;
-	      break;
-	    }
-	}
+        {
+          switch (event.type)
+            {
+            case SDL_EVENT_WINDOW_CLOSE_REQUESTED:
+              goto exit_game_loop;
+              break;
+            }
+        }
       // cairo_set_line_width(context, 0);
       cairo_set_source_rgb (context, 1, 1, 1);
       cairo_rectangle (context, 0, 0, surface_width, surface_height);
@@ -124,34 +124,35 @@ main_1 ()
       cairo_surface_flush (surface);
       void *surface_data = cairo_image_surface_get_data (surface);
       if (!surface_data)
-	{
-	  fprintf (stderr, "!surface_data\n");
-	  goto exit_game_loop;
-	}
+        {
+          fprintf (stderr, "!surface_data\n");
+          goto exit_game_loop;
+          int test = 0;
+        }
       int stride = cairo_image_surface_get_stride (surface);
       if (!stride)
-	{
-	  fprintf (stderr, "!stride\n");
-	  goto exit_game_loop;
-	}
+        {
+          fprintf (stderr, "!stride\n");
+          goto exit_game_loop;
+        }
       int pitch;
       void *pixels;
       SDL_LockTexture (texture, &rect, &pixels, &pitch);
       if (stride == pitch)
-	{
-	  memcpy (pixels, surface_data, stride * surface_height);
-	}
+        {
+          memcpy (pixels, surface_data, stride * surface_height);
+        }
       else
-	{
-	  unsigned char *surfptr = surface_data;
-	  unsigned char *pixptr = pixels;
-	  for (size_t row = 0; row < surface_height; row++)
-	    {
-	      memcpy (pixptr, surfptr, surface_width * 4);
-	      pixptr += pitch;
-	      surfptr += stride;
-	    }
-	}
+        {
+          unsigned char *surfptr = surface_data;
+          unsigned char *pixptr = pixels;
+          for (size_t row = 0; row < surface_height; row++)
+            {
+              memcpy (pixptr, surfptr, surface_width * 4);
+              pixptr += pitch;
+              surfptr += stride;
+            }
+        }
       SDL_UnlockTexture (texture);
       // SDL_SetRenderDrawColorFloat(renderer, 0, 0, 0, 1);
       // SDL_RenderClear(renderer);
@@ -160,9 +161,9 @@ main_1 ()
     }
 exit_game_loop:
   fprintf (stderr, "cairo_surface_status -> %s\n",
-	   cairo_status_to_string (cairo_surface_status (surface)));
+           cairo_status_to_string (cairo_surface_status (surface)));
   fprintf (stderr, "cairo_status -> %s\n",
-	   cairo_status_to_string (cairo_status (context)));
+           cairo_status_to_string (cairo_status (context)));
 destroy_context:
   cairo_destroy (context);
 destroy_surface:

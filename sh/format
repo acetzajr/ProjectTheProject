@@ -1,3 +1,0 @@
-#!/bin/bash
-indent $1
-rm $1~
