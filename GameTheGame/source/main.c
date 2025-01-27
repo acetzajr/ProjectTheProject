@@ -39,6 +39,14 @@ ejemplo ()
 int
 main_1 ()
 {
+  void destroy_window (SDL_Window ** window)
+  {
+    if (*window)
+      {
+        SDL_DestroyWindow (*window);
+      }
+    SDL_Quit ();
+  }
   printf ("Welcome to GameTheGame\n");
   printf ("%s\n", SDL_GetRevision ());
   if (!set_app_metadata ())
@@ -51,18 +59,18 @@ main_1 ()
       fprintf (stderr, "!SDL_Init(SDL_INIT_VIDEO)\n");
       goto exit;
     }
-  SDL_Window *window =
+  SDL_Window *clean (destroy_window) window =
     SDL_CreateWindow ("GameTheGame", window_width, window_height, 0);
   if (!window)
     {
       fprintf (stderr, "!window\n");
-      goto quit_sdl;
+      goto exit;
     }
   SDL_Renderer *renderer = SDL_CreateRenderer (window, nullptr);
   if (!renderer)
     {
       fprintf (stderr, "!renderer\n");
-      goto destroy_window;
+      goto exit;
     }
   if (!SDL_SetRenderVSync (renderer, 2))
     {
@@ -127,7 +135,6 @@ main_1 ()
         {
           fprintf (stderr, "!surface_data\n");
           goto exit_game_loop;
-          int test = 0;
         }
       int stride = cairo_image_surface_get_stride (surface);
       if (!stride)
@@ -172,10 +179,6 @@ destroy_texture:
   SDL_DestroyTexture (texture);
 destroy_renderer:
   SDL_DestroyRenderer (renderer);
-destroy_window:
-  SDL_DestroyWindow (window);
-quit_sdl:
-  SDL_Quit ();
 exit:
   fprintf (stderr, "SDL_GetError -> %s\n", SDL_GetError ());
   return 0;

@@ -1,4 +1,6 @@
 #!/bin/bash
 ./scripts/format-all
-git add .
+if ! git add .; then
+  exit 1
+fi
 git commit -m "$*"
