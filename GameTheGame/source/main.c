@@ -9,8 +9,6 @@
 
 #include <cairo/cairo.h>
 
-#define clean(f) __attribute__ ((cleanup (f)))
-
 int surface_width = 360;
 int surface_height = 180;
 int window_width = 1024;
@@ -87,20 +85,21 @@ main_1 ()
       fprintf (stderr, "!set_app_metadata()\n");
       return 1;
     }
-  bool clean (quit_sdl) sdl_initialized = SDL_Init (SDL_INIT_VIDEO);
+  [[gnu::cleanup (quit_sdl)]] bool sdl_initialized =
+    SDL_Init (SDL_INIT_VIDEO);
   if (!sdl_initialized)
     {
       fprintf (stderr, "!sdl_initialized\n");
       return 1;
     }
-  SDL_Window *clean (destroy_window) window
+  [[gnu::cleanup (destroy_window)]] SDL_Window *window
     = SDL_CreateWindow ("GameTheGame", window_width, window_height, 0);
   if (!window)
     {
       fprintf (stderr, "!window\n");
       return 1;
     }
-  SDL_Renderer *clean (destroy_renderer) renderer =
+  [[gnu::cleanup (destroy_renderer)]] SDL_Renderer *renderer =
     SDL_CreateRenderer (window, nullptr);
   if (!renderer)
     {
@@ -112,7 +111,7 @@ main_1 ()
       fprintf (stderr, "!SDL_SetRenderVSync(renderer, 2)\n");
       return 1;
     }
-  SDL_Texture *clean (destroy_texture) texture =
+  [[gnu::cleanup (destroy_texture)]] SDL_Texture *texture =
     SDL_CreateTexture (renderer, SDL_PIXELFORMAT_ARGB32,
                        SDL_TEXTUREACCESS_STREAMING, surface_width,
                        surface_height);
@@ -127,7 +126,7 @@ main_1 ()
                "!SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST)\n");
       return 1;
     }
-  cairo_surface_t *clean (destroy_surface) surface =
+  [[gnu::cleanup (destroy_surface)]] cairo_surface_t *surface =
     cairo_image_surface_create (CAIRO_FORMAT_ARGB32, surface_width,
                                 surface_height);
   if (cairo_surface_status (surface) != CAIRO_STATUS_SUCCESS)
@@ -138,7 +137,8 @@ main_1 ()
                cairo_status_to_string (cairo_surface_status (surface)));
       return 1;
     }
-  cairo_t *clean (destroy_context) context = cairo_create (surface);
+  [[gnu::cleanup (destroy_context)]] cairo_t *context =
+    cairo_create (surface);
   if (cairo_status (context) != CAIRO_STATUS_SUCCESS)
     {
       fprintf (stderr, "cairo_status(context) != CAIRO_STATUS_SUCCESS\n");

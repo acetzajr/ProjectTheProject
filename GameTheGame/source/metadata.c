@@ -1,6 +1,6 @@
 #include "metadata.h"
 
-#include <SDL3/SDL_init.h>
+#include <SDL3/SDL.h>
 
 bool
 set_app_metadata ()

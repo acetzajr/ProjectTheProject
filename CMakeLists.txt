@@ -7,7 +7,7 @@ set(CMAKE_C_EXTENSIONS ON)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_COMPILE_WARNING_AS_ERROR ON)
 
-# add_compile_options(-DHAVE_INLINE)
+add_compile_options(-Wfatal-errors -DHAVE_INLINE)
 
 find_package(PkgConfig REQUIRED)
 
