@@ -1,3 +1,0 @@
-Simple Directmedia Layer -> https://github.com/libsdl-org/SDL
-GLib -> https://gitlab.gnome.org/GNOME/glib
-

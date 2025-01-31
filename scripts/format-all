@@ -1,3 +1,0 @@
-#!/bin/bash
-find ./GameTheGame/ -iname "*.c" -type f -exec ./scripts/format '{}' ';';
-find ./GameTheGame/ -iname "*.h" -type f -exec ./scripts/format '{}' ';';

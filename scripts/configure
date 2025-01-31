@@ -1,5 +1,4 @@
 #!/bin/bash
-./scripts/format-all
-if ! cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -S . -B build -G Ninja; then
+if ! cmake -DCMAKE_BUILD_TYPE=Debug -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON; then
   exit 1
 fi
